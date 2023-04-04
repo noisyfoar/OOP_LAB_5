@@ -129,6 +129,11 @@
   <ItemGroup>
     <ClCompile Include="OOP_LAB_5.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="animals.h" />
+    <ClInclude Include="base.h" />
+    <ClInclude Include="some_answers.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
