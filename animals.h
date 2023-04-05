@@ -12,6 +12,7 @@ public:
 	Animal() {
 		cout << typeid(this).name() << " : constuctor\n";
 	}
+
 	Animal(const Animal& new_animal) {
 		cout << typeid(this).name() << " : copy constuctor\n";
 	}
@@ -32,7 +33,6 @@ public:
 };
 
 class Cat : public Animal {
-
 protected:
 	int lives = 9;
 	void catchMouse() {
@@ -135,6 +135,7 @@ void safely_type_conversion() {
 
 	const int zooSize = 30;
 	Animal* zoo[zooSize];
+
 	for (int i = 0; i < zooSize; ++i) {
 		if (rand() % 2) {
 			zoo[i] = new Cat();
@@ -148,7 +149,6 @@ void safely_type_conversion() {
 		Cat* c = dynamic_cast<Cat*>(zoo[i]);
 		if (c != nullptr) {
 			c->getAnnoyed();
-			continue;
 		}
 		Dog* d = dynamic_cast<Dog*>(zoo[i]);
 		if (d != nullptr) {
@@ -156,7 +156,6 @@ void safely_type_conversion() {
 		}
 	}
 }
-
 void examples() {
 
 	{
@@ -210,13 +209,13 @@ void examples() {
 		*/
 		cout << "3:\n";
 
-		Cat* c;
+		Cat* c = new Cat();
 		c->getBored();
 		delete c;
 
-		CheshireCat* c;
-		c->getBored();
-		delete c;
+		CheshireCat* cc = new CheshireCat();
+		cc->getBored();
+		delete cc;
 	}
 
 	{
@@ -234,17 +233,16 @@ void examples() {
 		*/
 		cout << "4:\n";
 
-		Cat* c;
+		Cat* c = new Cat();
 		c->move();
 		delete c;
 
-		CheshireCat* c;
-		c->move();
-		delete c;
+		CheshireCat* cc = new CheshireCat();
+		cc->move();
+		delete cc;
 	}
 
 }
-
 void classnames() {
 	Cat c;
 	CheshireCat cc;
@@ -262,7 +260,6 @@ void isInstances() {
 		c = cc;
 	}
 }
-
 void not_safe_type_conversion() {
 	Cat c;
 	CheshireCat cc;

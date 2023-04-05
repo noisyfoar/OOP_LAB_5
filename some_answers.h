@@ -37,15 +37,6 @@ public:
 };
 
 
-void unq(unique_ptr<int> p) {
-	cout << "unq()\n";
-}
-
-shared_ptr<int> shrd(shared_ptr<int> p) {
-	cout << "shrd()\n";
-	return p;
-}
-
 void overrided_and_inherited() {
 	BracketsMsg br_msg;
 	br_msg.Msg::print_hello();
@@ -56,28 +47,27 @@ void overrided_and_inherited() {
 
 void definition_virtual() {
 	{
-		BracketsMsg msg;
-		msg.setMsg("1");
+		Msg *msg = new BracketsMsg();
+		cout << msg->print_hello() << '\n';
 	}
 	cout << "------------\n";
 	{
 		Msg* msg_p = new BracketsMsg();
-		//убрать virtual в msg для примера
+
 		delete msg_p;
 	}
 }
 
 void smart_pointers() {
 	unique_ptr<int> unqObj = make_unique<int>();
-	unq(move(unqObj));  //передать в функцию можно только с помощью (move)
-	unique_ptr<int> unqObj2(new int());
-	//нельзя записать один unique_ptr в другой
-
+	unique_ptr<int> unqObj2(move(unqObj));
+	cout << unqObj << '\n' << unqObj2.get() << '\n';
 	cout << '\n';
 
 	shared_ptr<int> shrdObj(new int());
-	shrdObj = shrd(shrdObj);
-	//при передаче счетчик ссылок увеличится, но адрес будет один и тот же
 	shared_ptr<int> shrdObj2 = shrdObj;
-	shrdObj2 = shrd(shrdObj2);
+	cout << shrdObj << '\n' << shrdObj2.get() << '\n';
+	shrdObj.reset();
+	cout << '\n';
+	cout << shrdObj << '\n' << shrdObj2.get() << '\n';
 }
